@@ -61,10 +61,12 @@ const fetchAPI = (cityValue, country, newOrOld) =>
         if (newOrOld == 1)
         {
             displayNewData(icon, temp, desc);
+            updateScreenReaderConfirmation("Request was made successfully");
         }
         else if (newOrOld == 0)
         {
             displayOldData(icon, temp, desc, cityValue);
+            updateScreenReaderConfirmation("Request was made successfully");
         }
     }).catch((error) =>
     {
@@ -76,6 +78,7 @@ const fetchAPI = (cityValue, country, newOrOld) =>
         image.style = "visibility: hidden;";
         temp.style = "visibility: hidden;";
         desc.style = "visibility: hidden;";
+        updateScreenReaderConfirmation("There was an error. Make sure that city is spelled correctly.");
     });
 }
 
@@ -94,6 +97,7 @@ const displayNewData = (icon, temp, desc) =>
         let description = document.getElementById("description");
         description.style = "visibility: visible;";
         description.innerHTML = desc;
+        updateScreenReaderConfirmation("Displaying new data");
 };
 
 const displayOldData = (icon, temp, desc, city_state) =>
@@ -106,4 +110,10 @@ const displayOldData = (icon, temp, desc, city_state) =>
         cityAndState.innerHTML = city_state;
         let description = document.getElementById("description");
         description.innerHTML = desc;
+        updateScreenReaderConfirmation("Displaying old data");
+};
+
+const updateScreenReaderConfirmation = (action) =>
+{
+    document.getElementById("confirmation").textContent = `${action}`;
 };
