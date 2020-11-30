@@ -1,0 +1,115 @@
+@mixin mq($size)
+{
+    @media only screen and (min-width: $size)
+    {
+        @content;
+    }
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body
+{
+    font-size: 25px;
+    font-family: sans-serif;
+    color: black;
+    background-color: #a7a7a7;
+    width: 100%;
+    min-height: 100%;
+    @include mq(768px)
+    {
+        font-size: 50px;
+    }
+}
+
+body
+{
+    padding: 20px;
+    text-align: center;
+}
+
+section
+{
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+}
+
+#search
+{
+    background-color: #00d9ff;
+    border-radius: 10px;
+}
+
+#displayData
+{
+    margin-top: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+select
+{
+    height: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    @include mq(768px)
+    {
+        font-size: 50px;
+        height: 60px;
+    }
+}
+
+input[type = "text"]
+{
+    margin-bottom: 20px;
+    height: 40px;
+    width: 80%;
+    font-size: 20px;
+    @include mq(768px)
+    {
+        height: 60px;
+        font-size: 50px;
+    }
+}
+
+input[type = "submit"]
+{
+    margin-bottom: 20px;
+    width: 80px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #00b837;
+    color: #ffffff;
+    font-size: 20px;
+    @include mq(768px)
+    {
+        height: 60px;
+        width: 120px;
+        font-size: 30px;
+    }
+}
+
+input[type = "submit"]:hover
+{
+    filter: brightness(120%);
+    box-shadow: 4px 2px 5px #000;
+    cursor: pointer;
+}
+
+input[type = "text"]:hover
+{
+    box-shadow: 4px 2px 5px #000;
+    cursor: pointer;
+}
+
+select:hover
+{
+    box-shadow: 4px 2px 5px #000;
+    cursor: pointer;
+}
