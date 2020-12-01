@@ -20,7 +20,7 @@
             </select><br>
             <label for = "state">Select state</label><br>
             <select id = "state" aria-label = "Select a state from the list" tabindex = "0">
-                <option value = "">N/A</option>
+                <option value = "N/A">N/A</option>
                 <option value = "AL">Alabama</option>
                 <option value = "AK">Alaska</option>
                 <option value = "AZ">Arizona</option>
@@ -73,7 +73,7 @@
                 <option value = "WY">Wyoming</option>
             </select><br>
             <label for = "city">Enter city</label><br>
-            <input type = "text" id = "city" aria-label = "Type the name of the city" tabindex = "0" required/><br>
+            <input type = "text" id = "city" aria-label = "Type the name of the city" tabindex = "0" minlength = "3" required/><br>
             <input type = "submit" value = "Search" aria-label = "Submit your search" tabindex = "0"/>
         </form>
     </section>
@@ -84,7 +84,7 @@
             <h5 id = "temp"></h5>
             <h5 id = "description"></h5>
         </div>
-        <p id = "confirmation" class = "confirmation" aria-live = "assertive"></p>
+        <p id = "confirmation" class = "confirmation" aria-live = "assertive" style = "visibility: visible; font-size: small;"></p>
     </section>
 </body>
 </html>
