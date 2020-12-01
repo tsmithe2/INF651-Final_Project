@@ -8,9 +8,9 @@ if (!localStorage.getItem("city"))
     cityValue = "Hays, KS";
     country = "us";
 }
-else if (localStorage.getItem("state") == "N/A")
+else if (localStorage.getItem("country") != "us")
 {
-    cityValue = localStorage.getItem("city");
+    cityValue = localStorage.getItem("city") + ", " + localStorage.getItem("country");
     country = localStorage.getItem("country");
 }
 else
@@ -50,7 +50,6 @@ const processSubmission = () =>
     let country = document.getElementById("country");
     let city = document.getElementById("city");
     let state = document.getElementById("state");
-    
     let cityValue = city.value;
     if (state != "N/A")
     {
@@ -139,7 +138,12 @@ const displayNewData = (icon, temp, desc, country) =>
         myTemp.style = "visibility: visible;";
         myTemp.innerHTML = temp + "&#8457;";
         let cityAndState = document.getElementById("cityAndState");
-        if (state.value != "N/A")
+        console.log(country);
+        if (country != "us")
+        {
+            cityAndState.innerHTML = city.value + ", " + country;
+        }
+        else if (state.value != "N/A")
         {
             cityAndState.innerHTML = city.value + ", " + state.value;
         }
