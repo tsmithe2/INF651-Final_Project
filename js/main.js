@@ -79,10 +79,16 @@ const processSubmission = () =>
         let image = document.getElementById("image");
         let temp = document.getElementById("temp");
         let desc = document.getElementById("description");
+        let tempMin = document.getElementById("tempMin");
+        let tempMax = document.getElementById("tempMax");
+        let humidity = document.getElementById("humidity");
         errMessage.innerHTML = "Invalid city name";
         image.style = "visibility: hidden;";
         temp.style = "visibility: hidden;";
         desc.style = "visibility: hidden;";
+        tempMin.style = "visibility: hidden;";
+        tempMax.style = "visibility: hidden;";
+        humidity.style = "visibility: hidden;";
         updateScreenReaderConfirmation("There was an error. Make sure that city is spelled correctly.");
     }
 };
@@ -100,14 +106,17 @@ const fetchAPI = (cityValue, country, newOrOld) =>
         let icon = data.weather[0].icon;
         let temp = data.main.temp;
         let desc = data.weather[0].description;
+        let tempMin = data.main.temp_min;
+        let tempMax = data.main.temp_max;
+        let humidity = data.main.humidity;
         if (newOrOld == 1)
         {
-            displayNewData(icon, temp, desc, country);
+            displayNewData(icon, temp, desc, tempMin, tempMax, humidity, country);
             updateScreenReaderConfirmation("Request was made successfully");
         }
         else if (newOrOld == 0)
         {
-            displayOldData(icon, temp, desc, cityValue);
+            displayOldData(icon, temp, desc, tempMin, tempMax, humidity, cityValue);
             updateScreenReaderConfirmation("Request was made successfully");
         }
     }).catch((error) =>
@@ -116,10 +125,16 @@ const fetchAPI = (cityValue, country, newOrOld) =>
         let image = document.getElementById("image");
         let temp = document.getElementById("temp");
         let desc = document.getElementById("description");
+        let temp_min = document.getElementById("tempMin");
+        let temp_max = document.getElementById("tempMax");
+        let hum = document.getElementById("humidity");
         errMessage.innerHTML = "Invalid city name";
         image.style = "visibility: hidden;";
         temp.style = "visibility: hidden;";
         desc.style = "visibility: hidden;";
+        temp_min.style = "visibility: hidden;";
+        temp_max.style = "visibility: hidden;";
+        hum.style = "visibility: hidden;";
         updateScreenReaderConfirmation("There was an error. Make sure that city is spelled correctly.");
     });
 }
@@ -129,7 +144,7 @@ fetchAPI(cityValue, country , 0); //used for first instance, and when returning 
 /*
     Display the data that was requested.
  */
-const displayNewData = (icon, temp, desc, country) =>
+const displayNewData = (icon, temp, desc, tempMin, tempMax, humidity, country) =>
 {
         let image = document.getElementById("image");
         image.style = "visibility: visible;";
@@ -138,7 +153,6 @@ const displayNewData = (icon, temp, desc, country) =>
         myTemp.style = "visibility: visible;";
         myTemp.innerHTML = temp + "&#8457;";
         let cityAndState = document.getElementById("cityAndState");
-        console.log(country);
         if (country != "us")
         {
             cityAndState.innerHTML = city.value + ", " + country;
@@ -151,6 +165,15 @@ const displayNewData = (icon, temp, desc, country) =>
         {
             cityAndState.innerHTML = city.value + ", " + country;
         }
+        let temp_min = document.getElementById("tempMin");
+        temp_min.style = "visibility: visible;";
+        temp_min.innerHTML = "Low: " + tempMin + "&#8457;";
+        let temp_max = document.getElementById("tempMax");
+        temp_max.style = "visibility: visible;";
+        temp_max.innerHTML = "High: " + tempMax + "&#8457;";
+        let hum = document.getElementById("humidity");
+        hum.style = "visibility: visible;";
+        hum.innerHTML = "hummidity: " + humidity;
         let description = document.getElementById("description");
         description.style = "visibility: visible;";
         description.innerHTML = desc;
@@ -160,7 +183,7 @@ const displayNewData = (icon, temp, desc, country) =>
 /*
     Display data when the screen is refreshed.
  */
-const displayOldData = (icon, temp, desc, city_state) =>
+const displayOldData = (icon, temp, desc, tempMin, tempMax, humidity, city_state) =>
 {
         let image = document.getElementById("image");
         image.src = "http://openweathermap.org/img/wn/" + icon + "@2x.png"
@@ -168,6 +191,15 @@ const displayOldData = (icon, temp, desc, city_state) =>
         myTemp.innerHTML = temp + "&#8457;";
         let cityAndState = document.getElementById("cityAndState");
         cityAndState.innerHTML = city_state;
+        let temp_min = document.getElementById("tempMin");
+        temp_min.style = "visibility: visible;";
+        temp_min.innerHTML = "Low: " + tempMin + "&#8457;";
+        let temp_max = document.getElementById("tempMax");
+        temp_max.style = "visibility: visible;";
+        temp_max.innerHTML = "High: " + tempMax + "&#8457;";
+        let hum = document.getElementById("humidity");
+        hum.style = "visibility: visible;";
+        hum.innerHTML = "hummidity: " + humidity;
         let description = document.getElementById("description");
         description.innerHTML = desc;
         updateScreenReaderConfirmation("Displaying old data");
